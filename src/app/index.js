@@ -14,8 +14,13 @@
 var DEV = true;
 
 // init module
-let module = angular.module('userDashboard', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ngRoute', 'angular-websocket', 'ui.bootstrap', 'ui.codemirror', 'ngMaterial', 'ngMessages', 'angularMoment', 'angular.filter', 'ngDropdowns', 'ui.gravatar', 'ngLodash']);
+let module = angular.module('userDashboard', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ngRoute', 'angular-websocket', 'ui.bootstrap', 'ui.codemirror', 'ngMaterial', 'ngMessages', 'braintree-angular', 'angularMoment', 'angular.filter', 'ngDropdowns', 'ui.gravatar', 'ngLodash']);
 
+
+module.constant('clientTokenPath', '/')//need to init BrainTree
+  .factory('PaymentService', ['$http', '$q', '$braintree', function PaymentService($http, $q, $braintree) {
+    console.log('braintree initialized');
+  }]);
 
 // add a global resolve flag on all routes (user needs to be resolved first)
 module.config(['$routeProvider', function ($routeProvider) {
