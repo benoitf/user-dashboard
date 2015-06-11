@@ -14,7 +14,7 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
-  // Define the configuration for all the tasks
+    // Define the configuration for all the tasks
   grunt.initConfig({
 
     // Project settings
@@ -23,6 +23,19 @@ module.exports = function (grunt) {
       app: require('./bower.json').appPath || 'app',
       dist: 'target/user-dashboard-war'
     },
+
+    ngconstant: {
+          options: {
+              name: 'config',
+              dest: '<%= yeoman.app %>/scripts/config.js',
+              constants: {
+                  sampleProject: grunt.file.readJSON('conf/sample_project.json')
+              }
+
+          },
+          build: {
+          }
+      },
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
@@ -406,6 +419,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-connect-proxy');
   grunt.loadNpmTasks('grunt-bower-install');
+  grunt.loadNpmTasks('grunt-ng-constant');
 
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
@@ -444,6 +458,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'ngconstant',
     /*'bower-install',*/
     'useminPrepare',
     'concurrent:dist',
