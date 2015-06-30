@@ -16,7 +16,7 @@ class NavBarCtrl {
    * Default constructor
    * @ngInject for Dependency injection
    */
-  constructor($scope, $mdSidenav, userDashboardConfig, codenvyAPI) {
+  constructor($rootScope, $mdSidenav, userDashboardConfig, codenvyAPI) {
     this.mdSidenav = $mdSidenav;
     this.codenvyAPI = codenvyAPI;
     this.codenvyUser = codenvyAPI.getUser();
@@ -27,6 +27,7 @@ class NavBarCtrl {
     let promiseUser = this.codenvyUser.fetchUser();
     promiseUser.then(() => {
       this.updateAdminRole();
+      this.isSimpleUser = !this.codenvyUser.isAdmin();
     });
 
     this.profile = codenvyAPI.getProfile().getProfile();
@@ -38,6 +39,14 @@ class NavBarCtrl {
     this.onpremAdminExpanded = true;
     this.updated = false;
 
+    $rootScope.$watch(
+      () => codenvyAPI.getUser().userPromise,
+      (newValue, oldValue) => {
+        this.isSimpleUser = !this.codenvyUser.isAdmin();
+        this.profile = codenvyAPI.getProfile().getProfile();
+        this.profile.$promise.then(() => this.updateData(),() => this.updateData());
+      }
+    );
   }
 
   /**
@@ -45,6 +54,8 @@ class NavBarCtrl {
    */
   updateData() {
     this.updated = true;
+    console.log(this.profile.attributes);
+    console.log(this.isSimpleUser);
     if(!this.profile.attributes) {
       return;
     }
@@ -65,10 +76,6 @@ class NavBarCtrl {
 
   userIsAdmin() {
     return this.codenvyUser.isAdmin();
-  }
-
-  isSimpleUser() {
-    return !this.codenvyUser.isAdmin();
   }
 
   flipOnpremAdminExpanded() {

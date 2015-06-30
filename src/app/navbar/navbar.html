@@ -19,14 +19,14 @@
       </section>
       <section layout="column" layout-align="center center">
         <cdvy-button-dropdown cdvy-button-dropdown-href="#/create-project" cdvy-button-dropdown-label="New Project"
-                              cdvy-button-dropdown-controller="navbarCtrl" ng-if="navbarCtrl.isSimpleUser()"></cdvy-button-dropdown>
+                              cdvy-button-dropdown-controller="navbarCtrl" ng-if="navbarCtrl.isSimpleUser"></cdvy-button-dropdown>
       </section>
       <section layout="column" layout-align="center center">&nbsp;</section>
-      <md-divider md-theme="factory-theme" ng-show="navbarCtrl.isSimpleUser()"></md-divider>
+      <md-divider md-theme="factory-theme" ng-show="navbarCtrl.isSimpleUser"></md-divider>
 
       <div class="admin-navbar-menu">
         <section class="left-sidebar-menu" layout="column" layout-align="center center">
-          <md-list layout="column" ng-show="navbarCtrl.isSimpleUser()">
+          <md-list layout="column" ng-show="navbarCtrl.isSimpleUser">
             <md-list-item flex class="navbar-subsection-item"
                           ng-show="navbarCtrl.displayLoginItem">
               <md-button nav-bar-selected flex ng-href="#/login" layout-align="left">
@@ -66,9 +66,9 @@
           </md-list>
         </section>
       </div>
-      <md-divider md-theme="factory-theme" ng-show="navbarCtrl.isSimpleUser()"></md-divider>
+      <md-divider md-theme="factory-theme" ng-show="navbarCtrl.isSimpleUser"></md-divider>
       <div class="admin-navbar-menu"
-           ng-show="navbarCtrl.profile.attributes && navbarCtrl.isSimpleUser()" ng-init="isExpand=true">
+           ng-show="navbarCtrl.profile.attributes && navbarCtrl.isSimpleUser" ng-init="isExpand=true">
         <div class="navbar-identity"
              flex layout="row" layout-align="start center">
       <span flex layout="row" layout-align="start center" layout-padding>
@@ -105,10 +105,10 @@
       <cdvy-navbar-admin class="admin-navbar-menu" ng-show="navbarCtrl.userIsAdmin()"></cdvy-navbar-admin>
       <cdvy-admin-links class="admin-navbar-menu" ng-if="navbarCtrl.userIsAdmin()"></cdvy-admin-links>
 
-      <md-divider md-theme="factory-theme" ng-show="navbarCtrl.isSimpleUser()"></md-divider>
+      <md-divider md-theme="factory-theme" ng-show="navbarCtrl.isSimpleUser"></md-divider>
     </div>
   </md-toolbar>
-  <div class="navbar-beta-widget" ng-show="navbarCtrl.isSimpleUser()">
+  <div class="navbar-beta-widget" ng-show="navbarCtrl.isSimpleUser">
     <ud-beta-widget></ud-beta-widget>
   </div>
 </div>
